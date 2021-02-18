@@ -12,6 +12,9 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final emailRegex = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
     return Form(
       key: welcomeForm,
       child: Container(
@@ -52,13 +55,15 @@ class WelcomePage extends StatelessWidget {
             TextFormField(
               decoration: InputDecoration(
                 icon: Icon(Icons.email_outlined),
-                labelText: 'Email',
+                hintText: 'Email',
               ),
               keyboardType: TextInputType.emailAddress,
               controller: emailTextController,
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Email must not empty';
+                } else if (!emailRegex.hasMatch(value)) {
+                  return 'Email format invalid';
                 }
                 return null;
               },

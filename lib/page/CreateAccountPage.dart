@@ -1,4 +1,5 @@
 import 'package:create_account/component/step_indicator/StepIndicator.dart';
+import 'package:create_account/page/CreatePasswordPage.dart';
 import 'package:create_account/page/WelcomePage.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class CreateAccountPage extends StatefulWidget {
 
 class CreateAccountPageState extends State<CreateAccountPage> {
   int _steps;
-  TextEditingController _emailTextController;
+  TextEditingController _emailTextController, _passwordTextController;
   GlobalKey<FormState> _welcomeForm,
       _createPasswordForm,
       _personalInfoForm,
@@ -25,6 +26,7 @@ class CreateAccountPageState extends State<CreateAccountPage> {
     _scheduleVideoCallForm = GlobalKey<FormState>();
 
     _emailTextController = TextEditingController();
+    _passwordTextController = TextEditingController();
     super.initState();
   }
 
@@ -51,7 +53,10 @@ class CreateAccountPageState extends State<CreateAccountPage> {
         );
         break;
       case 1:
-        page = Container();
+        page = CreatePasswordPage(
+          createPasswordForm: _createPasswordForm,
+          passwordTextController: _passwordTextController,
+        );
         break;
       case 2:
         page = Container();
@@ -65,7 +70,7 @@ class CreateAccountPageState extends State<CreateAccountPage> {
     }
 
     return Listener(
-      onPointerDown: (_) => _disableSoftKeyboard(),
+      //onPointerDown: (_) => _disableSoftKeyboard(),
       child: Scaffold(
         appBar: _steps == 0
             ? AppBar(
@@ -119,9 +124,14 @@ class CreateAccountPageState extends State<CreateAccountPage> {
                           setState(() {
                             _steps = _steps + 1;
                           });
-                        } else {}
+                        }
                         break;
                       case 1:
+                        if (_createPasswordForm.currentState.validate()) {
+                          setState(() {
+                            _steps = _steps + 1;
+                          });
+                        }
                         break;
                       case 2:
                         break;
