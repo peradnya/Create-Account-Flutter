@@ -128,24 +128,6 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
               ),
             ),
             ComplexityIndicator(complexity: _complexity),
-            /*
-            Container(height: 20),
-            RichText(
-              text: TextSpan(
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                children: [
-                  TextSpan(text: 'Complexity: '),
-                  TextSpan(
-                    text: complexity,
-                    style: TextStyle(
-                      color: colorComplexity,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(height: 20),*/
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
