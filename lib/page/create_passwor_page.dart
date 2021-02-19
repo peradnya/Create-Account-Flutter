@@ -1,4 +1,5 @@
 import 'package:create_account/component/custom_text_field/custom_text_field.dart';
+import 'package:create_account/component/page_header/page_header.dart';
 import 'package:create_account/component/validation_indicator/validation_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -74,25 +75,13 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
       key: widget.createPasswordForm,
       child: Container(
         width: double.infinity,
-        //padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Create Password',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.white),
+            PageHeader(
+              title: 'Create Password',
+              subtitle: 'Password will be used to login to account',
             ),
-            Text(
-              'Password will be used to login to account',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                  color: Colors.white),
-            ),
-            Container(height: 20),
             CustomTextField(
               password: _hidePassword,
               controller: widget.passwordTextController,
@@ -124,42 +113,6 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
                 }),
               ),
             ),
-            /*
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Create Password',
-                suffixIcon: IconButton(
-                  icon: Icon(
-                      _hidePassword ? Icons.visibility : Icons.visibility_off),
-                  onPressed: () {
-                    setState(() {
-                      _hidePassword = !_hidePassword;
-                    });
-                  },
-                ),
-              ),
-              controller: widget.passwordTextController,
-              validator: (value) {
-                if (value.isEmpty ||
-                    !value.contains(RegExp(r'[a-z]')) ||
-                    !value.contains(RegExp(r'[A-Z]')) ||
-                    !value.contains(RegExp(r'[0-9]')) ||
-                    value.length < 9) {
-                  return 'Password complexity must be very strong.';
-                }
-                return null;
-              },
-              onChanged: (value) {
-                setState(() {
-                  _lowercase = value.contains(RegExp(r'[a-z]'));
-                  _uppercase = value.contains(RegExp(r'[A-Z]'));
-                  _number = value.contains(RegExp(r'[0-9]'));
-                  _length9 = value.length >= 9;
-                  _length = value.length;
-                });
-              },
-              obscureText: _hidePassword,
-            ),*/
             Container(height: 20),
             RichText(
               text: TextSpan(

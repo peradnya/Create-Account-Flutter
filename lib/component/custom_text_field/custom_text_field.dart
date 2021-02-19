@@ -32,8 +32,8 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
       decoration: BoxDecoration(
         color: color,
         borderRadius: radius,
@@ -48,7 +48,7 @@ class CustomTextField extends StatelessWidget {
         onChanged: onChanged,
         obscureText: password,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(15),
+          contentPadding: const EdgeInsets.all(15),
           labelText: label,
           floatingLabelBehavior: label == null
               ? FloatingLabelBehavior.never

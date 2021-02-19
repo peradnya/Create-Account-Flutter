@@ -1,3 +1,5 @@
+import 'package:create_account/component/custom_dropdown/custom_dropdown.dart';
+import 'package:create_account/component/page_header/page_header.dart';
 import 'package:create_account/data/goal_for_activation.dart';
 import 'package:create_account/data/monthly_expense.dart';
 import 'package:create_account/data/monthly_income.dart';
@@ -32,17 +34,17 @@ class PersonalInfoPage extends StatelessWidget {
       key: personalInfoForm,
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DropdownButtonFormField<Pair<int, String>>(
-              value: goalForActivationValue,
-              decoration: InputDecoration(
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                labelText: 'Goal for activation',
-                hintText: '- Choose Option -',
-              ),
+            PageHeader(
+              title: 'Personal Information',
+              subtitle:
+                  'Please fill in the information below and your goal for digital saving.',
+            ),
+            CustomDropDown(
+              label: 'Goal for activation',
+              hint: '- Choose Option -',
               items: goal_for_activation.map((e) {
                 return DropdownMenuItem(child: Text(e.v), value: e);
               }).toList(),
@@ -52,15 +54,12 @@ class PersonalInfoPage extends StatelessWidget {
                 }
                 return null;
               },
+              value: goalForActivationValue,
               onChanged: goalForActivationCallback,
             ),
-            DropdownButtonFormField<Pair<int, String>>(
-              value: monthlyIncomeValue,
-              decoration: InputDecoration(
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                labelText: 'Monthly Income',
-                hintText: '- Choose Option -',
-              ),
+            CustomDropDown(
+              label: 'Monthly income',
+              hint: '- Choose Option -',
               items: monthly_income.map((e) {
                 return DropdownMenuItem(child: Text(e.v), value: e);
               }).toList(),
@@ -70,15 +69,12 @@ class PersonalInfoPage extends StatelessWidget {
                 }
                 return null;
               },
+              value: monthlyIncomeValue,
               onChanged: monthlyIncomeCallback,
             ),
-            DropdownButtonFormField<Pair<int, String>>(
-              value: monthlyExpenseValue,
-              decoration: InputDecoration(
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                labelText: 'Monthly Expense',
-                hintText: '- Choose Option -',
-              ),
+            CustomDropDown(
+              label: 'Monthly expense',
+              hint: '- Choose Option -',
               items: monthly_expense.map((e) {
                 return DropdownMenuItem(child: Text(e.v), value: e);
               }).toList(),
@@ -88,6 +84,7 @@ class PersonalInfoPage extends StatelessWidget {
                 }
                 return null;
               },
+              value: monthlyExpenseValue,
               onChanged: monthlyExpenseCallback,
             ),
           ],

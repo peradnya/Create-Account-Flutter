@@ -1,4 +1,5 @@
 import 'package:create_account/component/custom_text_field/custom_text_field.dart';
+import 'package:create_account/component/page_header/page_header.dart';
 import 'package:create_account/utils/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -146,25 +147,14 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
       key: widget.scheduleVideoCallForm,
       child: Container(
         width: double.infinity,
-        //padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Scheduled Video Call',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.white),
+            PageHeader(
+              title: 'Scheduled Video Call',
+              subtitle:
+                  'Choose the date and time that you preferred. We will send a link via email to make a video call on the scheduled date and time.',
             ),
-            Text(
-              'Choose the date and time that you preferred. We will send a link via email to make a video call on the scheduled date and time.',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                  color: Colors.white),
-            ),
-            Container(height: 20),
             datePicker,
             timePicker,
           ],
