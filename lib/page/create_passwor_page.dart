@@ -1,3 +1,4 @@
+import 'package:create_account/component/custom_text_field/custom_text_field.dart';
 import 'package:create_account/component/validation_indicator/validation_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -73,7 +74,7 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
       key: widget.createPasswordForm,
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.all(20),
+        //padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -92,6 +93,38 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
                   color: Colors.white),
             ),
             Container(height: 20),
+            CustomTextField(
+              password: _hidePassword,
+              controller: widget.passwordTextController,
+              hint: 'Create Password',
+              validator: (value) {
+                if (value.isEmpty ||
+                    !value.contains(RegExp(r'[a-z]')) ||
+                    !value.contains(RegExp(r'[A-Z]')) ||
+                    !value.contains(RegExp(r'[0-9]')) ||
+                    value.length < 9) {
+                  return 'Password complexity must be very strong.';
+                }
+                return null;
+              },
+              onChanged: (value) {
+                setState(() {
+                  _lowercase = value.contains(RegExp(r'[a-z]'));
+                  _uppercase = value.contains(RegExp(r'[A-Z]'));
+                  _number = value.contains(RegExp(r'[0-9]'));
+                  _length9 = value.length >= 9;
+                  _length = value.length;
+                });
+              },
+              tail: IconButton(
+                icon: Icon(
+                    _hidePassword ? Icons.visibility : Icons.visibility_off),
+                onPressed: () => setState(() {
+                  _hidePassword = !_hidePassword;
+                }),
+              ),
+            ),
+            /*
             TextFormField(
               decoration: InputDecoration(
                 hintText: 'Create Password',
@@ -126,7 +159,7 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
                 });
               },
               obscureText: _hidePassword,
-            ),
+            ),*/
             Container(height: 20),
             RichText(
               text: TextSpan(

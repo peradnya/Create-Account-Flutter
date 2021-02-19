@@ -170,7 +170,7 @@ class CreateAccountPageState extends State<CreateAccountPage> {
               ),
               Expanded(
                 child: Container(
-                  color: _steps == 0 ? Colors.white : Colors.blue,
+                  color: _steps == 0 ? Colors.grey.shade100 : Colors.blue,
                   child: SingleChildScrollView(
                     child: page,
                   ),
@@ -179,7 +179,7 @@ class CreateAccountPageState extends State<CreateAccountPage> {
               Container(
                 padding: EdgeInsets.all(20),
                 width: double.infinity,
-                color: _steps == 0 ? Colors.white : Colors.blue,
+                color: _steps == 0 ? Colors.grey.shade100 : Colors.blue,
                 child: RaisedButton(
                   color: Colors.lightBlue,
                   child: Text(

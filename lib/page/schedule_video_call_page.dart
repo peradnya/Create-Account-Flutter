@@ -1,3 +1,4 @@
+import 'package:create_account/component/custom_text_field/custom_text_field.dart';
 import 'package:create_account/utils/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,20 +37,18 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
   Widget build(BuildContext context) {
     final isIos = Theme.of(context).platform == TargetPlatform.iOS;
 
-    final datePicker = TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Date',
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        hintText: '- Choose Date -',
-      ),
-      readOnly: true,
+    final datePicker = CustomTextField(
       controller: _dateTextController,
+      label: 'Date',
+      hint: '- Choose Date -',
+      readOnly: true,
       validator: (value) {
         if (value.isEmpty) {
           return 'Must put the date';
         }
         return null;
       },
+      tail: Icon(Icons.arrow_drop_down),
       onTap: () async {
         if (isIos) {
           await showCupertinoModalPopup(
@@ -66,7 +65,7 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
                       widget.dateCallback(result);
                     });
                   },
-                  initialDateTime: widget.date,
+                  initialDateTime: widget.date ?? DateTime.now(),
                   minimumYear: 1900,
                   maximumYear: 2100,
                 ),
@@ -76,7 +75,7 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
         } else {
           final result = await showDatePicker(
             context: context,
-            initialDate: widget.date,
+            initialDate: widget.date ?? DateTime.now(),
             firstDate: DateTime(1900),
             lastDate: DateTime(2100),
           );
@@ -90,20 +89,18 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
       },
     );
 
-    final timePicker = TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Time',
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        hintText: '- Choose Time -',
-      ),
-      readOnly: true,
+    final timePicker = CustomTextField(
       controller: _timeTextController,
+      label: 'Time',
+      hint: '- Choose Time -',
+      readOnly: true,
       validator: (value) {
         if (value.isEmpty) {
           return 'Must put the time';
         }
         return null;
       },
+      tail: Icon(Icons.arrow_drop_down),
       onTap: () async {
         if (isIos) {
           await showCupertinoModalPopup(
@@ -149,7 +146,7 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
       key: widget.scheduleVideoCallForm,
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.all(20),
+        //padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

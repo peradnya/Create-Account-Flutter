@@ -1,3 +1,4 @@
+import 'package:create_account/component/custom_text_field/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -19,7 +20,7 @@ class WelcomePage extends StatelessWidget {
       key: welcomeForm,
       child: Container(
         width: double.infinity,
-        color: Colors.white,
+        color: Colors.grey.shade100,
         padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,21 +53,26 @@ class WelcomePage extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
             ),
             Container(height: 20),
-            TextFormField(
-              decoration: InputDecoration(
-                icon: Icon(Icons.email_outlined),
-                hintText: 'Email',
+            Card(
+              elevation: 10,
+              margin: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              keyboardType: TextInputType.emailAddress,
-              controller: emailTextController,
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Email must not empty';
-                } else if (!emailRegex.hasMatch(value)) {
-                  return 'Email format invalid';
-                }
-                return null;
-              },
+              child: CustomTextField(
+                color: Colors.grey.shade100,
+                controller: emailTextController,
+                hint: 'Email',
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Email must not empty';
+                  } else if (!emailRegex.hasMatch(value)) {
+                    return 'Email format invalid';
+                  }
+                  return null;
+                },
+                head: Icon(Icons.email_outlined),
+              ),
             ),
           ],
         ),
