@@ -21,41 +21,45 @@ class WelcomePage extends StatelessWidget {
       child: Container(
         width: double.infinity,
         color: Colors.grey.shade100,
-        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            RichText(
-              text: TextSpan(
-                style: TextStyle(
+            Container(
+              height: 60,
+              width: double.infinity,
+              color: Colors.blue,
+              child: CustomPaint(painter: _CustomCurve()),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: RichText(
+                text: TextSpan(
+                  style: TextStyle(
                     color: Colors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
-                children: [TextSpan(text: 'Welcome to')],
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: [
+                    TextSpan(text: 'Welcome to\n'),
+                    TextSpan(text: 'GIN '),
+                    TextSpan(
+                      text: 'Finans',
+                      style: TextStyle(color: Colors.blue),
+                    )
+                  ],
+                ),
               ),
             ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
-                children: [
-                  TextSpan(text: 'GIN '),
-                  TextSpan(
-                      text: 'Finans', style: TextStyle(color: Colors.blue)),
-                ],
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: Text(
+                'Welcome to The Bank of The Future. Manage and track your accounts on the go.',
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
               ),
             ),
-            Container(height: 20),
-            Text(
-              'Welcome to The Bank of The Future. Manage and track your accounts on the go.',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-            ),
-            Container(height: 20),
             Card(
               elevation: 10,
-              margin: EdgeInsets.zero,
+              margin: EdgeInsets.all(20),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
@@ -79,5 +83,29 @@ class WelcomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _CustomCurve extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = Colors.grey.shade100;
+    paint.style = PaintingStyle.fill;
+
+    var path = Path();
+
+    path.moveTo(0, size.height);
+    path.quadraticBezierTo(size.width * 0.03, size.height * 0.25,
+        size.width * 0.13, size.height * 0);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
