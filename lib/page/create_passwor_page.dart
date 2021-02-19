@@ -51,6 +51,8 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
         return ComplexityState.STRONG;
       case 5:
         return ComplexityState.VERY_STRONG;
+      default:
+        return ComplexityState.EMPTY;
     }
   }
 
