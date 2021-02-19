@@ -2,6 +2,7 @@ import 'package:create_account/component/step_indicator/step_indicator.dart';
 import 'package:create_account/data/pairs.dart';
 import 'package:create_account/page/create_passwor_page.dart';
 import 'package:create_account/page/personal_info_page.dart';
+import 'package:create_account/page/schedule_video_call_page.dart';
 import 'package:create_account/page/welcome_page.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,11 @@ class CreateAccountPageState extends State<CreateAccountPage> {
 
   Function _goalForActivationCallback,
       _monthlyExpenseCallback,
-      _monthlyIncomeCallback;
+      _monthlyIncomeCallback,
+      _dateVideoCallCallback,
+      _timeVideoCallCallback;
+
+  DateTime _dateVideoCall, _timeVideoCall;
 
   FocusScopeNode _focus;
 
@@ -42,6 +47,8 @@ class CreateAccountPageState extends State<CreateAccountPage> {
     _goalForActivationValue = null;
     _monthlyExpenseValue = null;
     _monthlyIncomeValue = null;
+    _dateVideoCall = null;
+    _timeVideoCall = null;
 
     _goalForActivationCallback = (value) {
       setState(() {
@@ -58,6 +65,18 @@ class CreateAccountPageState extends State<CreateAccountPage> {
     _monthlyIncomeCallback = (value) {
       setState(() {
         _monthlyIncomeValue = value;
+      });
+    };
+
+    _dateVideoCallCallback = (value) {
+      setState(() {
+        _dateVideoCall = value;
+      });
+    };
+
+    _timeVideoCallCallback = (value) {
+      setState(() {
+        _timeVideoCall = value;
       });
     };
 
@@ -104,10 +123,18 @@ class CreateAccountPageState extends State<CreateAccountPage> {
         );
         break;
       case 3:
-        page = Container();
+        page = ScheduleVideoCallPage(
+          scheduleVideoCallForm: _scheduleVideoCallForm,
+          date: _dateVideoCall,
+          time: _timeVideoCall,
+          dateCallback: _dateVideoCallCallback,
+          timeCallback: _timeVideoCallCallback,
+        );
         break;
       default:
-        page = Container();
+        page = Container(
+          child: Text('Registered'),
+        );
         break;
     }
 
@@ -183,6 +210,11 @@ class CreateAccountPageState extends State<CreateAccountPage> {
                         }
                         break;
                       case 3:
+                        if (_scheduleVideoCallForm.currentState.validate()) {
+                          setState(() {
+                            _steps = _steps + 1;
+                          });
+                        }
                         break;
                       default:
                         break;

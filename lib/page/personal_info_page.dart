@@ -34,6 +34,7 @@ class PersonalInfoPage extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DropdownButtonFormField<Pair<int, String>>(
               value: goalForActivationValue,

@@ -1,0 +1,178 @@
+import 'package:create_account/utils/date_format.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class ScheduleVideoCallPage extends StatefulWidget {
+  final GlobalKey<FormState> scheduleVideoCallForm;
+  final DateTime date, time;
+  final Function dateCallback, timeCallback;
+
+  const ScheduleVideoCallPage({
+    Key key,
+    @required this.scheduleVideoCallForm,
+    @required this.date,
+    @required this.time,
+    @required this.dateCallback,
+    @required this.timeCallback,
+  }) : super(key: key);
+
+  @override
+  ScheduleVideoCallPageState createState() => ScheduleVideoCallPageState();
+}
+
+class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
+  TextEditingController _dateTextController, _timeTextController;
+
+  @override
+  void initState() {
+    _dateTextController =
+        TextEditingController(text: DateFormat.formatDate(widget.date));
+    _timeTextController =
+        TextEditingController(text: DateFormat.formatTime(widget.time));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isIos = Theme.of(context).platform == TargetPlatform.iOS;
+
+    final datePicker = TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Date',
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        hintText: '- Choose Date -',
+      ),
+      readOnly: true,
+      controller: _dateTextController,
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Must put the date';
+        }
+        return null;
+      },
+      onTap: () async {
+        if (isIos) {
+          await showCupertinoModalPopup(
+            context: context,
+            builder: (context) {
+              return Container(
+                height: 300,
+                color: Colors.white,
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.date,
+                  onDateTimeChanged: (result) {
+                    setState(() {
+                      _dateTextController.text = DateFormat.formatDate(result);
+                      widget.dateCallback(result);
+                    });
+                  },
+                  initialDateTime: widget.date,
+                  minimumYear: 1900,
+                  maximumYear: 2100,
+                ),
+              );
+            },
+          );
+        } else {
+          final result = await showDatePicker(
+            context: context,
+            initialDate: widget.date,
+            firstDate: DateTime(1900),
+            lastDate: DateTime(2100),
+          );
+          if (result != null) {
+            setState(() {
+              _dateTextController.text = DateFormat.formatDate(result);
+              widget.dateCallback(result);
+            });
+          }
+        }
+      },
+    );
+
+    final timePicker = TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Time',
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        hintText: '- Choose Time -',
+      ),
+      readOnly: true,
+      controller: _timeTextController,
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Must put the time';
+        }
+        return null;
+      },
+      onTap: () async {
+        if (isIos) {
+          await showCupertinoModalPopup(
+            context: context,
+            builder: (context) {
+              return Container(
+                height: 300,
+                color: Colors.white,
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.time,
+                  onDateTimeChanged: (result) {
+                    setState(() {
+                      _timeTextController.text = DateFormat.formatTime(result);
+                      widget.timeCallback(result);
+                    });
+                  },
+                  initialDateTime: widget.time ?? DateTime.now(),
+                  minimumYear: 1900,
+                  maximumYear: 2100,
+                ),
+              );
+            },
+          );
+        } else {
+          final result = await showTimePicker(
+            context: context,
+            initialTime: TimeOfDay.fromDateTime(widget.time ?? DateTime.now()),
+          );
+          if (result != null) {
+            setState(() {
+              DateTime def = widget.time ?? DateTime.now();
+              DateTime time = DateTime(
+                  def.year, def.month, def.day, result.hour, result.minute);
+              _timeTextController.text = DateFormat.formatTime(time);
+              widget.timeCallback(time);
+            });
+          }
+        }
+      },
+    );
+
+    return Form(
+      key: widget.scheduleVideoCallForm,
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Scheduled Video Call',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.white),
+            ),
+            Text(
+              'Choose the date and time that you preferred. We will send a link via email to make a video call on the scheduled date and time.',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  color: Colors.white),
+            ),
+            Container(height: 20),
+            datePicker,
+            timePicker,
+          ],
+        ),
+      ),
+    );
+  }
+}
