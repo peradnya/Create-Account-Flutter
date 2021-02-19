@@ -31,8 +31,6 @@ class CreateAccountPageState extends State<CreateAccountPage> {
 
   DateTime _dateVideoCall, _timeVideoCall;
 
-  FocusScopeNode _focus;
-
   @override
   void initState() {
     _steps = 0;
@@ -85,14 +83,14 @@ class CreateAccountPageState extends State<CreateAccountPage> {
 
   @override
   void didChangeDependencies() {
-    _focus = FocusScope.of(context);
     super.didChangeDependencies();
   }
 
-  void _disableSoftKeyboard() {
-    if (!_focus.hasPrimaryFocus && _focus.focusedChild != null) {
-      _focus.focusedChild.unfocus();
-    }
+  @override
+  void dispose() {
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
+    super.dispose();
   }
 
   @override
@@ -138,92 +136,93 @@ class CreateAccountPageState extends State<CreateAccountPage> {
         break;
     }
 
-    return Listener(
-      //onPointerDown: (_) => _disableSoftKeyboard(),
-      child: Scaffold(
-        appBar: _steps == 0
-            ? AppBar(
-                elevation: 0,
-                title: Container(),
-              )
-            : AppBar(
-                elevation: 0,
-                leading: IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () {
-                    setState(() {
-                      if (_steps > 0) {
-                        _steps = _steps - 1;
-                      }
-                    });
-                  },
-                ),
-                title: Text('Create Account'),
-              ),
-        body: Container(
-          color: Colors.blue,
-          child: Column(
-            children: [
-              StepIndicator(
-                currentStep: _steps,
-                maxStep: 4,
-              ),
-              Expanded(
-                child: Container(
-                  color: _steps == 0 ? Colors.grey.shade100 : Colors.blue,
-                  child: SingleChildScrollView(
-                    child: page,
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(20),
-                width: double.infinity,
-                color: _steps == 0 ? Colors.grey.shade100 : Colors.blue,
-                child: RaisedButton(
-                  color: Colors.lightBlue,
-                  child: Text(
-                    'Next',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    switch (_steps) {
-                      case 0:
-                        if (_welcomeForm.currentState.validate()) {
-                          setState(() {
-                            _steps = _steps + 1;
-                          });
-                        }
-                        break;
-                      case 1:
-                        if (_createPasswordForm.currentState.validate()) {
-                          setState(() {
-                            _steps = _steps + 1;
-                          });
-                        }
-                        break;
-                      case 2:
-                        if (_personalInfoForm.currentState.validate()) {
-                          setState(() {
-                            _steps = _steps + 1;
-                          });
-                        }
-                        break;
-                      case 3:
-                        if (_scheduleVideoCallForm.currentState.validate()) {
-                          setState(() {
-                            _steps = _steps + 1;
-                          });
-                        }
-                        break;
-                      default:
-                        break;
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: _steps == 0
+          ? AppBar(
+              elevation: 0,
+              title: Container(),
+            )
+          : AppBar(
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  setState(() {
+                    if (_steps > 0) {
+                      _steps = _steps - 1;
                     }
-                  },
+                  });
+                },
+              ),
+              title: Text('Create Account'),
+            ),
+      body: Container(
+        color: Colors.blue,
+        child: Column(
+          children: [
+            StepIndicator(currentStep: _steps, maxStep: 4),
+            Expanded(
+              child: Container(
+                color: _steps == 0 ? Colors.grey.shade100 : Colors.blue,
+                child: SingleChildScrollView(child: page),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(20),
+              width: double.infinity,
+              color: _steps == 0 ? Colors.grey.shade100 : Colors.blue,
+              child: RaisedButton(
+                color: Colors.lightBlue.shade400,
+                elevation: 0,
+                focusElevation: 0,
+                hoverElevation: 0,
+                disabledElevation: 0,
+                highlightElevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
                 ),
-              )
-            ],
-          ),
+                child: Text(
+                  'Next',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  switch (_steps) {
+                    case 0:
+                      if (_welcomeForm.currentState.validate()) {
+                        setState(() {
+                          _steps = _steps + 1;
+                        });
+                      }
+                      break;
+                    case 1:
+                      if (_createPasswordForm.currentState.validate()) {
+                        setState(() {
+                          _steps = _steps + 1;
+                        });
+                      }
+                      break;
+                    case 2:
+                      if (_personalInfoForm.currentState.validate()) {
+                        setState(() {
+                          _steps = _steps + 1;
+                        });
+                      }
+                      break;
+                    case 3:
+                      if (_scheduleVideoCallForm.currentState.validate()) {
+                        setState(() {
+                          _steps = _steps + 1;
+                        });
+                      }
+                      break;
+                    default:
+                      break;
+                  }
+                },
+              ),
+            )
+          ],
         ),
       ),
     );

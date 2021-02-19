@@ -1,3 +1,4 @@
+import 'package:create_account/component/complexity_indicator/complexity_indicator.dart';
 import 'package:create_account/component/custom_text_field/custom_text_field.dart';
 import 'package:create_account/component/page_header/page_header.dart';
 import 'package:create_account/component/validation_indicator/validation_indicator.dart';
@@ -20,6 +21,38 @@ class CreatePasswordPage extends StatefulWidget {
 class CreatePasswordPageState extends State<CreatePasswordPage> {
   bool _hidePassword, _lowercase, _uppercase, _number, _length9;
   int _length;
+  ComplexityState _complexity;
+
+  static ComplexityState _checkComplexity({
+    bool lowercase,
+    bool uppercase,
+    bool number,
+    bool length9,
+    int length,
+  }) {
+    int complexityValue = 0;
+
+    complexityValue = complexityValue + (length > 0 ? 1 : 0);
+    complexityValue = complexityValue + (lowercase ? 1 : 0);
+    complexityValue = complexityValue + (uppercase ? 1 : 0);
+    complexityValue = complexityValue + (number ? 1 : 0);
+    complexityValue = complexityValue + (length9 ? 1 : 0);
+
+    switch (complexityValue) {
+      case 0:
+        return ComplexityState.EMPTY;
+      case 1:
+        return ComplexityState.VERY_WEAK;
+      case 2:
+        return ComplexityState.WEAK;
+      case 3:
+        return ComplexityState.MEDIUM;
+      case 4:
+        return ComplexityState.STRONG;
+      case 5:
+        return ComplexityState.VERY_STRONG;
+    }
+  }
 
   @override
   void initState() {
@@ -29,48 +62,19 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
     _uppercase = widget.passwordTextController.text.contains(RegExp(r'[A-Z]'));
     _number = widget.passwordTextController.text.contains(RegExp(r'[0-9]'));
     _length9 = widget.passwordTextController.text.length >= 9;
+
+    _complexity = _checkComplexity(
+      length: _length,
+      lowercase: _lowercase,
+      uppercase: _uppercase,
+      number: _number,
+      length9: _length9,
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    String complexity = '';
-    Color colorComplexity = Colors.red;
-
-    int complexityValue = 0;
-    complexityValue = complexityValue + (_length > 0 ? 1 : 0);
-    complexityValue = complexityValue + (_lowercase ? 1 : 0);
-    complexityValue = complexityValue + (_uppercase ? 1 : 0);
-    complexityValue = complexityValue + (_number ? 1 : 0);
-    complexityValue = complexityValue + (_length9 ? 1 : 0);
-
-    switch (complexityValue) {
-      case 0:
-        complexity = '';
-        colorComplexity = Colors.red;
-        break;
-      case 1:
-        complexity = 'Very weak';
-        colorComplexity = Colors.red;
-        break;
-      case 2:
-        complexity = 'Weak';
-        colorComplexity = Colors.orange;
-        break;
-      case 3:
-        complexity = 'Medium';
-        colorComplexity = Colors.yellow;
-        break;
-      case 4:
-        complexity = 'Strong';
-        colorComplexity = Colors.lightGreen;
-        break;
-      case 5:
-        complexity = 'Very strong';
-        colorComplexity = Colors.lightGreen;
-        break;
-    }
-
     return Form(
       key: widget.createPasswordForm,
       child: Container(
@@ -103,6 +107,14 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
                   _number = value.contains(RegExp(r'[0-9]'));
                   _length9 = value.length >= 9;
                   _length = value.length;
+
+                  _complexity = _checkComplexity(
+                    length: _length,
+                    lowercase: _lowercase,
+                    uppercase: _uppercase,
+                    number: _number,
+                    length9: _length9,
+                  );
                 });
               },
               tail: IconButton(
@@ -113,6 +125,8 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
                 }),
               ),
             ),
+            ComplexityIndicator(complexity: _complexity),
+            /*
             Container(height: 20),
             RichText(
               text: TextSpan(
@@ -129,18 +143,30 @@ class CreatePasswordPageState extends State<CreatePasswordPage> {
                 ],
               ),
             ),
-            Container(height: 20),
+            Container(height: 20),*/
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ValidationIndicator(
-                    valid: _lowercase, title: 'a', subtitle: 'LowerCase'),
+                  valid: _lowercase,
+                  title: 'a',
+                  subtitle: 'LowerCase',
+                ),
                 ValidationIndicator(
-                    valid: _uppercase, title: 'A', subtitle: 'UpperCase'),
+                  valid: _uppercase,
+                  title: 'A',
+                  subtitle: 'UpperCase',
+                ),
                 ValidationIndicator(
-                    valid: _number, title: '123', subtitle: 'Number'),
+                  valid: _number,
+                  title: '123',
+                  subtitle: 'Number',
+                ),
                 ValidationIndicator(
-                    valid: _length9, title: '9+', subtitle: 'Characters'),
+                  valid: _length9,
+                  title: '9+',
+                  subtitle: 'Characters',
+                ),
               ],
             )
           ],
