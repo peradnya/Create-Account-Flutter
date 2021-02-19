@@ -1,3 +1,4 @@
+import 'package:create_account/component/animated_calendar_icon/animated_calendar_icon.dart';
 import 'package:create_account/component/custom_text_field/custom_text_field.dart';
 import 'package:create_account/component/page_header/page_header.dart';
 import 'package:create_account/utils/date_format.dart';
@@ -150,6 +151,7 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            AnimatedCalendarIcon(),
             PageHeader(
               title: 'Scheduled Video Call',
               subtitle:

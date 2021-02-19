@@ -72,6 +72,7 @@ class WelcomePage extends StatelessWidget {
                   return null;
                 },
                 head: Icon(Icons.email_outlined),
+                textInputType: TextInputType.emailAddress,
               ),
             ),
           ],
