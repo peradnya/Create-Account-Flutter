@@ -1,4 +1,4 @@
-import 'package:create_account/component/step_icon/StepIcon.dart';
+import 'package:create_account/component/step_icon/step_icon.dart';
 import 'package:flutter/material.dart';
 
 class StepIndicator extends StatelessWidget {

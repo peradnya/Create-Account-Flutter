@@ -1,4 +1,4 @@
-import 'package:create_account/page/CreateAccountPage.dart';
+import 'package:create_account/page/create_account_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

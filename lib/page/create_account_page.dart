@@ -1,6 +1,8 @@
-import 'package:create_account/component/step_indicator/StepIndicator.dart';
-import 'package:create_account/page/CreatePasswordPage.dart';
-import 'package:create_account/page/WelcomePage.dart';
+import 'package:create_account/component/step_indicator/step_indicator.dart';
+import 'package:create_account/data/pairs.dart';
+import 'package:create_account/page/create_passwor_page.dart';
+import 'package:create_account/page/personal_info_page.dart';
+import 'package:create_account/page/welcome_page.dart';
 import 'package:flutter/material.dart';
 
 class CreateAccountPage extends StatefulWidget {
@@ -15,6 +17,15 @@ class CreateAccountPageState extends State<CreateAccountPage> {
       _createPasswordForm,
       _personalInfoForm,
       _scheduleVideoCallForm;
+
+  Pair<int, String> _goalForActivationValue,
+      _monthlyExpenseValue,
+      _monthlyIncomeValue;
+
+  Function _goalForActivationCallback,
+      _monthlyExpenseCallback,
+      _monthlyIncomeCallback;
+
   FocusScopeNode _focus;
 
   @override
@@ -27,6 +38,29 @@ class CreateAccountPageState extends State<CreateAccountPage> {
 
     _emailTextController = TextEditingController();
     _passwordTextController = TextEditingController();
+
+    _goalForActivationValue = null;
+    _monthlyExpenseValue = null;
+    _monthlyIncomeValue = null;
+
+    _goalForActivationCallback = (value) {
+      setState(() {
+        _goalForActivationValue = value;
+      });
+    };
+
+    _monthlyExpenseCallback = (value) {
+      setState(() {
+        _monthlyExpenseValue = value;
+      });
+    };
+
+    _monthlyIncomeCallback = (value) {
+      setState(() {
+        _monthlyIncomeValue = value;
+      });
+    };
+
     super.initState();
   }
 
@@ -59,7 +93,15 @@ class CreateAccountPageState extends State<CreateAccountPage> {
         );
         break;
       case 2:
-        page = Container();
+        page = PersonalInfoPage(
+          personalInfoForm: _personalInfoForm,
+          goalForActivationValue: _goalForActivationValue,
+          goalForActivationCallback: _goalForActivationCallback,
+          monthlyExpenseValue: _monthlyExpenseValue,
+          monthlyExpenseCallback: _monthlyExpenseCallback,
+          monthlyIncomeValue: _monthlyIncomeValue,
+          monthlyIncomeCallback: _monthlyIncomeCallback,
+        );
         break;
       case 3:
         page = Container();
@@ -134,6 +176,11 @@ class CreateAccountPageState extends State<CreateAccountPage> {
                         }
                         break;
                       case 2:
+                        if (_personalInfoForm.currentState.validate()) {
+                          setState(() {
+                            _steps = _steps + 1;
+                          });
+                        }
                         break;
                       case 3:
                         break;

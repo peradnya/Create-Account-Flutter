@@ -1,4 +1,4 @@
-import 'package:create_account/component/validation_indicator/ValidationIndicator.dart';
+import 'package:create_account/component/validation_indicator/validation_indicator.dart';
 import 'package:flutter/material.dart';
 
 class CreatePasswordPage extends StatefulWidget {
