@@ -4,7 +4,7 @@ import 'package:create_account/data/monthly_income.dart';
 import 'package:create_account/data/pairs.dart';
 import 'package:flutter/material.dart';
 
-class PersonalInfoPage extends StatefulWidget {
+class PersonalInfoPage extends StatelessWidget {
   final GlobalKey<FormState> personalInfoForm;
 
   final Pair<int, String> goalForActivationValue,
@@ -27,21 +27,16 @@ class PersonalInfoPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  PersonalInfoPageState createState() => PersonalInfoPageState();
-}
-
-class PersonalInfoPageState extends State<PersonalInfoPage> {
-  @override
   Widget build(BuildContext context) {
     return Form(
-      key: widget.personalInfoForm,
+      key: personalInfoForm,
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
             DropdownButtonFormField<Pair<int, String>>(
-              value: widget.goalForActivationValue,
+              value: goalForActivationValue,
               decoration: InputDecoration(
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 labelText: 'Goal for activation',
@@ -56,10 +51,10 @@ class PersonalInfoPageState extends State<PersonalInfoPage> {
                 }
                 return null;
               },
-              onChanged: widget.goalForActivationCallback,
+              onChanged: goalForActivationCallback,
             ),
             DropdownButtonFormField<Pair<int, String>>(
-              value: widget.monthlyIncomeValue,
+              value: monthlyIncomeValue,
               decoration: InputDecoration(
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 labelText: 'Monthly Income',
@@ -74,10 +69,10 @@ class PersonalInfoPageState extends State<PersonalInfoPage> {
                 }
                 return null;
               },
-              onChanged: widget.monthlyIncomeCallback,
+              onChanged: monthlyIncomeCallback,
             ),
             DropdownButtonFormField<Pair<int, String>>(
-              value: widget.monthlyExpenseValue,
+              value: monthlyExpenseValue,
               decoration: InputDecoration(
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 labelText: 'Monthly Expense',
@@ -92,7 +87,7 @@ class PersonalInfoPageState extends State<PersonalInfoPage> {
                 }
                 return null;
               },
-              onChanged: widget.monthlyExpenseCallback,
+              onChanged: monthlyExpenseCallback,
             ),
           ],
         ),
