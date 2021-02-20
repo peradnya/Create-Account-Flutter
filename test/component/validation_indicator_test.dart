@@ -1,4 +1,3 @@
-import 'package:create_account/component/step_icon/step_icon.dart';
 import 'package:create_account/component/validation_indicator/validation_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
