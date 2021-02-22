@@ -60,6 +60,15 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
       tail: Icon(Icons.arrow_drop_down),
       onTap: () async {
         if (isIos) {
+          final init = widget.date ?? DateTime.now();
+
+          if (widget.date == null) {
+            setState(() {
+              _dateTextController.text = DateFormat.formatDate(init);
+              widget.dateCallback(init);
+            });
+          }
+
           await showCupertinoModalPopup(
             context: context,
             builder: (context) {
@@ -74,7 +83,7 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
                       widget.dateCallback(result);
                     });
                   },
-                  initialDateTime: widget.date ?? DateTime.now(),
+                  initialDateTime: init,
                   minimumYear: 1900,
                   maximumYear: 2100,
                 ),
@@ -112,6 +121,15 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
       tail: Icon(Icons.arrow_drop_down),
       onTap: () async {
         if (isIos) {
+          final init = widget.time ?? DateTime.now();
+
+          if (widget.time == null) {
+            setState(() {
+              _timeTextController.text = DateFormat.formatTime(init);
+              widget.timeCallback(init);
+            });
+          }
+
           await showCupertinoModalPopup(
             context: context,
             builder: (context) {
@@ -126,7 +144,7 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
                       widget.timeCallback(result);
                     });
                   },
-                  initialDateTime: widget.time ?? DateTime.now(),
+                  initialDateTime: init,
                   minimumYear: 1900,
                   maximumYear: 2100,
                 ),
@@ -160,7 +178,7 @@ class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
           children: [
             AnimatedCalendarIcon(),
             PageHeader(
-              title: 'Scheduled Video Call',
+              title: 'Schedule Video Call',
               subtitle:
                   'Choose the date and time that you preferred. We will send a link via email to make a video call on the scheduled date and time.',
             ),
