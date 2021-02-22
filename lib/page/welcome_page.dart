@@ -1,6 +1,10 @@
 import 'package:create_account/component/custom_text_field/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
+/// [WelcomePage]
+/// This class is used to create Welcome Page that will be consumed by [CreateAccountPage].
+/// This clasas need [GlobalKey<FormState>] to detect state of current form.
+/// and [TextEditingController] to save the email value.
 class WelcomePage extends StatelessWidget {
   final GlobalKey<FormState> welcomeForm;
   final TextEditingController emailTextController;
@@ -86,6 +90,8 @@ class WelcomePage extends StatelessWidget {
   }
 }
 
+/// [_CustomCurve]
+/// This private class is used to create curve header that used by [WelcomePage].
 class _CustomCurve extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

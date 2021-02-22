@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// [ValidationIndicator]
+/// Component to create validation indicator.
+/// This component use [bool] valid to flag if validation is valid
+/// use [String] title to bring title, and [String] subtitle to bring subtitle.
 class ValidationIndicator extends StatelessWidget {
   final String title, subtitle;
   final bool valid;

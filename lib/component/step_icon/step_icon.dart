@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// [StepIcon]
+/// Component to create step icon.
+/// use [bool] isFinished to flag if the step is already finished,
+/// and [String] text to give name of step.
 class StepIcon extends StatelessWidget {
   final String text;
   final bool isFinished;

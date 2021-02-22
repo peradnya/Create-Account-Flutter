@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// [PageHeader]
+/// Component to create page header.
+/// use [String] title to bring title to header,
+/// and [String] subtitle to bring subtitle to header.
 class PageHeader extends StatelessWidget {
   final String title, subtitle;
 

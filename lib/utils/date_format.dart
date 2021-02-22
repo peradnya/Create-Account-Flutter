@@ -26,6 +26,8 @@ class DateFormat {
     'Des',
   ];
 
+  /// [formatDate]
+  /// This function will convert the [DateTime] to formatted date [String].
   static String formatDate(DateTime date) {
     if (date == null) {
       return '';
@@ -34,6 +36,8 @@ class DateFormat {
     }
   }
 
+  /// [formatTime]
+  /// This function will convert the [DateTime] to formatted time [String].
   static String formatTime(DateTime date) {
     if (date == null) {
       return '';

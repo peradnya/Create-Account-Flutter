@@ -1,6 +1,9 @@
 import 'package:create_account/component/step_icon/step_icon.dart';
 import 'package:flutter/material.dart';
 
+/// [StepIndicator]
+/// Component to create step indicator.
+/// use [int] currentStep to flag the currentStep, and [int] maxStep to flag the maxStep.
 class StepIndicator extends StatelessWidget {
   final int currentStep, maxStep;
 

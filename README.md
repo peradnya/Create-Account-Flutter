@@ -4,6 +4,8 @@ A create account application
 
 ## Getting Started
 
+Created by: Ida Bagus Putu Peradnya Dinata
+
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
@@ -54,6 +56,7 @@ $ flutter test
 ## Developer Note
 
 There are several asumptions that used by developer when creating this apps:
+* Flutter SDK and Android/iOS builder have been installed in the system.
 * The **password complexity check result** is determined by number of passed validation. If only one validation pass out five then the result is VERY WEAK, and if all passed then the result is VERY STRONG.
 * **Date formatted** in Bahasa Indonesia based on screenshot.
 * **Back button** on the top of header will move the process to the previous one.

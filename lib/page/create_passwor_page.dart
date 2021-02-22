@@ -4,6 +4,10 @@ import 'package:create_account/component/page_header/page_header.dart';
 import 'package:create_account/component/validation_indicator/validation_indicator.dart';
 import 'package:flutter/material.dart';
 
+/// [CreatePasswordPage]
+/// This class is used to create Create Password Page that will be consumed by [CreateAccountPage].
+/// This clasas need [GlobalKey<FormState>] to detect state of current form,
+/// and [TextEditingController] to save the password value.
 class CreatePasswordPage extends StatefulWidget {
   final GlobalKey<FormState> createPasswordForm;
   final TextEditingController passwordTextController;
@@ -18,6 +22,8 @@ class CreatePasswordPage extends StatefulWidget {
   CreatePasswordPageState createState() => CreatePasswordPageState();
 }
 
+/// [CreatePasswordPageState]
+/// This class is used to save state of [CreatePasswordPage]
 class CreatePasswordPageState extends State<CreatePasswordPage> {
   bool _hidePassword, _lowercase, _uppercase, _number, _length9;
   int _length;

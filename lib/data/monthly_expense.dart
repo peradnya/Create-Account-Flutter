@@ -1,5 +1,6 @@
 import 'package:create_account/data/pairs.dart';
 
+/// data of monthly expense options
 const monthly_expense = <Pair<int, String>>[
   Pair(0, '< 1M'),
   Pair(1, '>= 1M & < 3M'),

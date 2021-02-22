@@ -6,11 +6,15 @@ import 'package:create_account/page/schedule_video_call_page.dart';
 import 'package:create_account/page/welcome_page.dart';
 import 'package:flutter/material.dart';
 
+/// [CreateAccountPage]
+/// This class is used to create navigation between [WelcomePage], [CreatePasswordPage], [PersonalInfoPage], and [ScheduleVideoCallPage].
 class CreateAccountPage extends StatefulWidget {
   @override
   CreateAccountPageState createState() => CreateAccountPageState();
 }
 
+/// [CreateAccountPageState]
+/// This class is used to save state of [CreateAccountPage]
 class CreateAccountPageState extends State<CreateAccountPage> {
   int _steps;
   TextEditingController _emailTextController, _passwordTextController;

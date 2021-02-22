@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// [AnimatedCalendarIcon]
+/// Component to create the animated calendar icon.
 class AnimatedCalendarIcon extends StatefulWidget {
   @override
   _AnimatedCalendarIconState createState() => _AnimatedCalendarIconState();

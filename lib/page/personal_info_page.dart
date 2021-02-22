@@ -6,6 +6,11 @@ import 'package:create_account/data/monthly_income.dart';
 import 'package:create_account/data/pairs.dart';
 import 'package:flutter/material.dart';
 
+/// [PersonalInfoPage]
+/// This class is used to create Personal Info Page that will be consumed by [CreateAccountPage].
+/// This clasas need [GlobalKey<FormState>] to detect state of current form,
+/// [Pair<int, String>] to save the goalForActivation, monthlyIncome, and monthlyExpense value.
+/// and [Function] to trigger callback to the [CreateAccountPage] when value changed.
 class PersonalInfoPage extends StatelessWidget {
   final GlobalKey<FormState> personalInfoForm;
 

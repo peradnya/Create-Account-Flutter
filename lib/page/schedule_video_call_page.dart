@@ -5,6 +5,11 @@ import 'package:create_account/utils/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// [ScheduleVideoCallPage]
+/// This class is used to create Scheduled Video Call Page that will be consumed by [CreateAccountPage].
+/// This clasas need [GlobalKey<FormState>] to detect state of current form,
+/// [DateTime] to save the date and time value.
+/// and [Function] to trigger callback to the [CreateAccountPage] when value changed.
 class ScheduleVideoCallPage extends StatefulWidget {
   final GlobalKey<FormState> scheduleVideoCallForm;
   final DateTime date, time;
@@ -23,6 +28,8 @@ class ScheduleVideoCallPage extends StatefulWidget {
   ScheduleVideoCallPageState createState() => ScheduleVideoCallPageState();
 }
 
+/// [ScheduleVideoCallPageState]
+/// This class is used to save state of [ScheduleVideoCallPage]
 class ScheduleVideoCallPageState extends State<ScheduleVideoCallPage> {
   TextEditingController _dateTextController, _timeTextController;
 

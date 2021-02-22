@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+/// enum of complexity state
 enum ComplexityState { EMPTY, VERY_WEAK, WEAK, MEDIUM, STRONG, VERY_STRONG }
 
+/// [ComplexityIndicator]
+/// Component to create the complexity indicator.
+/// use [ComplexityState] complexity to set the state of complexity,
 class ComplexityIndicator extends StatelessWidget {
   final ComplexityState complexity;
 

@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+/// [CustomDropDown]
+/// Component to create the custom dropdown.
+/// use [T] value to set the value,
+/// use [List<DropdownMenuItem<T>>] items to set the dropdown items,
+/// use [String] label to bring label to text field,
+/// use [String] hint to bring hint to text field,
+/// use [String Function(T)] validator to bring validator to text field,
+/// use [Function(T)] onChanged as callback that called when text changed,
+/// and [Color] color is flag to change text field background color.
 class CustomDropDown<T> extends StatelessWidget {
   final T value;
   final List<DropdownMenuItem<T>> items;
