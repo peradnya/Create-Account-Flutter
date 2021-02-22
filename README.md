@@ -22,6 +22,8 @@ samples, guidance on mobile development, and a full API reference.
 ### Run on Emulator
 If you want run the app inside emulator, first you should find the `emulator_id` of emulator that you want to run. Below you can see the `emulator_id` of Pixel 3 XL API 30 is `Pixel_3_XL_API_30`.
 ```console
+$ cd <project directory>
+
 $ flutter emulators
 1 available emulator:
 
@@ -36,6 +38,8 @@ $ flutter run
 ### Run on Real Device
 If you want run the app inside real device, first you should find the `device_id` of emulator that you want to run. Below you can see the `device_id` of sdk gphone x86 arm (mobile) is `emulator-5554`.
 ```console
+$ cd <project directory>
+
 $ flutter devices
 1 connected device:
 
